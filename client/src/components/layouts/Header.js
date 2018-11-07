@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
@@ -25,7 +22,7 @@ function MyIcon(props) {
   return <SvgIcon path d="../public/baseline-menu-24px.scg" />;
 }
 
-function ButtonAppBar(props) {
+function Header(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -39,7 +36,7 @@ function ButtonAppBar(props) {
             <MyIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            News
+            Stationary 4 Africa
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
@@ -48,8 +45,8 @@ function ButtonAppBar(props) {
   );
 }
 
-ButtonAppBar.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(Header);

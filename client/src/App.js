@@ -1,15 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./App.css";
-import "./components/AppNavbar";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-//import AppNavbar from "./components/AppNavbar";
-import ButtonAppBar from "./components/ButtonAppBar";
+import { Header, Footer } from "./components/layouts";
+import Content from "./components/content";
 
 class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <ButtonAppBar />
+        <Fragment>
+          <Header />
+
+          <Content />
+
+          <Footer />
+        </Fragment>
       </MuiThemeProvider>
     );
   }
