@@ -17,3 +17,5 @@ must have npm installed and node
 `$npm i -D`
 
 `$cd client && npm i bootsrap reactstrap uuid react-transition-group`
+
+- now create a config folder and make a keys.js inside it with the mongoDB keys
