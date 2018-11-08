@@ -1,16 +1,9 @@
-import React, { Component } from "react";
-import {
-  Paper,
-  Typography,
-  Avatar,
-  Button,
-  FormGroup
-} from "@material-ui/core";
+import React, { Component, Fragment } from "react";
+import { Paper, Typography, Button, FormGroup } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Switch from "@material-ui/core/Switch";
 
 //import SwitchLabel from "./SwitchLabel";
@@ -32,6 +25,27 @@ class RightPane extends Component {
     return this.state.checkedA === false ? "User" : "Company";
   }
 
+  userType() {
+    return this.state.checkedA === false ? (
+      <Fragment>
+        <FormControl margin="normal" required fullWidth>
+          <InputLabel>Firstname</InputLabel>
+          <Input id="username" autoFocus />
+        </FormControl>
+
+        <FormControl margin="normal" required fullWidth>
+          <InputLabel>Last Name</InputLabel>
+          <Input id="username" />
+        </FormControl>
+      </Fragment>
+    ) : (
+      <FormControl margin="normal" required fullWidth>
+        <InputLabel>Company Name</InputLabel>
+        <Input id="username" autoFocus />
+      </FormControl>
+    );
+  }
+
   render() {
     return (
       <Paper style={this.props.style.Paper}>
@@ -51,16 +65,16 @@ class RightPane extends Component {
             label={this.toggleLabel()}
           />
 
+          {this.userType()}
+
           <FormControl margin="normal" required fullWidth>
             <InputLabel>Username</InputLabel>
-            <Input id="username" autoFocus />
+            <Input id="username" />
           </FormControl>
-
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
+            <Input id="email" name="email" autoComplete="email" />
           </FormControl>
-
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
