@@ -8,7 +8,7 @@ const style = {
 
 export default props => (
   <Grid container justify="center">
-    <Grid xs={12} sm={6}>
+    <Grid xs={12} sm={6} md={4}>
       <RightPane style={style} />
     </Grid>
   </Grid>
