@@ -12,10 +12,8 @@
 
 must have npm installed and node 
 
-`$npm i express body-parser mongoose concurrently`
+`$npm i //which installs the node modules in the root
 
-`$npm i -D`
-
-`$cd client && npm i bootsrap reactstrap uuid react-transition-group`
+`$cd client && npm i //which installs node modules in the client
 
 - now create a config folder and make a keys.js inside it with the mongoDB keys
