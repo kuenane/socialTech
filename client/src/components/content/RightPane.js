@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from "react";
 import { Paper, Typography, FormGroup } from "@material-ui/core";
-import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
 import Switch from "@material-ui/core/Switch";
 import NewUser from "./dialogs/NewUser";
+import {
+  Firstname,
+  Username,
+  CompanyName,
+  Lastname,
+  Email,
+  Password
+} from "./formInputs";
 
 class RightPane extends Component {
   constructor(props) {
@@ -27,27 +32,17 @@ class RightPane extends Component {
   userType() {
     return this.state.checkedA === false ? (
       <Fragment>
-        <FormControl margin="normal" required>
-          <InputLabel>Firstname</InputLabel>
-          <Input id="username" autoFocus />
-        </FormControl>
-
-        <FormControl margin="normal" required>
-          <InputLabel>Last Name</InputLabel>
-          <Input id="username" />
-        </FormControl>
+        <Firstname />
+        <Lastname />
       </Fragment>
     ) : (
-      <FormControl margin="normal" required>
-        <InputLabel>Company Name</InputLabel>
-        <Input id="username" autoFocus />
-      </FormControl>
+      <CompanyName />
     );
   }
 
   render() {
     return (
-      <Paper style={this.props.style.Paper}>
+      <Paper>
         <FormGroup>
           <Typography component="h1" variant="h5">
             Registration
@@ -66,23 +61,9 @@ class RightPane extends Component {
 
           {this.userType()}
 
-          <FormControl margin="normal" required>
-            <InputLabel>Username</InputLabel>
-            <Input id="username" />
-          </FormControl>
-          <FormControl margin="normal" required>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" />
-          </FormControl>
-          <FormControl margin="normal" required>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </FormControl>
+          <Username />
+          <Email />
+          <Password />
           <NewUser />
         </FormGroup>
       </Paper>
