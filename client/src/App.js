@@ -1,21 +1,18 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import { Header, Footer } from "./components/layouts";
 import Content from "./components/content";
 
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider>
-        <Fragment>
-          <Header />
+      <Fragment>
+        <Header />
 
-          <Content />
+        <Content />
 
-          <Footer />
-        </Fragment>
-      </MuiThemeProvider>
+        <Footer />
+      </Fragment>
     );
   }
 }
