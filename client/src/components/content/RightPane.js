@@ -64,7 +64,7 @@ class RightPane extends Component {
           <Username />
           <Email />
           <Password />
-          <NewUser />
+          <NewUser toggle={this.state.checkedA} />
         </FormGroup>
       </Paper>
     );
