@@ -4,22 +4,9 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-const theme = createMuiTheme({
-  overrides: {
-    Header: {
-      root: {
-        flexGrow: 1
-      },
-      grow: {
-        flexGrow: 1
-      },
-      menuButton: {
-        marginLeft: -12,
-        marginRight: 20
-      }
-    }
-  }
-});
+const theme = createMuiTheme({});
+
+console.log({ theme });
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
