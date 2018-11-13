@@ -5,6 +5,11 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
+  "@global": {
+    "html, body, #root": {
+      height: "100%"
+    }
+  },
   headerText: {
     flexGrow: 1
   },
