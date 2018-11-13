@@ -4,6 +4,9 @@ import { Header, Footer } from "./components/layouts";
 import Content from "./components/content";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <Fragment>
