@@ -4,7 +4,7 @@ import RightPane from "./RightPane";
 
 export default props => (
   <Grid container justify="center">
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={6}>
       <RightPane />
     </Grid>
   </Grid>
