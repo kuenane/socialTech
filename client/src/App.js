@@ -1,18 +1,15 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import { Header, Footer } from "./components/layouts";
-import Content from "./components/content";
+import Body from "./components/content/Body";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <Fragment>
         <Header />
 
-        <Content />
+        <Body />
 
         <Footer />
       </Fragment>
