@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Paper, Typography, FormGroup } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import NewUser from "./dialogs/NewUser";
@@ -12,10 +14,17 @@ import {
   Password
 } from "./formInputs";
 
+const styles = {
+  registerPaper: {
+    padding: "5% 15% 5% 15%"
+  },
+  registerLabel: {}
+};
+
 class RightPane extends Component {
   constructor(props) {
     super(props);
-    this.props = props;
+    this.classes = props;
     this.state = {
       checkedA: false
     };
@@ -41,10 +50,11 @@ class RightPane extends Component {
   }
 
   render() {
+    const { classes } = this.classes;
     return (
-      <Paper>
+      <Paper classes={{ root: classes.registerPaper }}>
         <FormGroup>
-          <Typography component="h1" variant="h5">
+          <Typography variant="h2" gutterBottom={true}>
             Registration
           </Typography>
           <FormControlLabel
@@ -71,4 +81,8 @@ class RightPane extends Component {
   }
 }
 
-export default RightPane;
+RightPane.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(RightPane);
