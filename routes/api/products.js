@@ -18,7 +18,7 @@ const Product = require('../../models/products')
 // @route   POST api/products
 // @desc    Create a product
 // @access  public
-/*router.post('/', (req, res) => {
+router.post('/', (req, res) => {
     //create in memory
     const newProduct = new Product({
         name: req.body.name
@@ -26,7 +26,8 @@ const Product = require('../../models/products')
     // save
     newProduct.save().then(product => res.json(product));
 }); // because we are already inside the required path 
-*/
+
+
 // DEL
 // @route   DEL api/products
 // @desc    Delete a product
