@@ -11,42 +11,70 @@ import {
 class NewUser extends Component {
   constructor(props) {
     super(props);
-    this.props = props;
-    this.registerUser = this.registerUser.bind(this);
+
+    this.state = {
+      openDialog: false
+    };
+
+    this.validateUser = this.validateUser.bind(this);
+    this.clearValidationErrors = this.clearValidationErrors.bind(this);
+    this.validateUser = this.validateUser.bind(this);
   }
 
-  state = {
-    open: false
-  };
-
   handleClickOpen = () => {
-    this.setState({ open: true });
-    this.registerUser();
+    if (this.validateUser() === true) {
+      this.setState({ openDialog: true });
+    }
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ openDialog: false });
   };
 
-  registerUser() {
-    var userInput = {};
-    if (this.props.toggle === false) {
-      userInput = {
-        Firstname: document.getElementById("firstname").value,
-        Lastname: document.getElementById("lastname").value,
-        Username: document.getElementById("username").value,
-        Email: document.getElementById("email").value,
-        Password: document.getElementById("password").value
-      };
-    } else {
-      userInput = {
-        CompanyName: document.getElementById("companyName").value,
-        Username: document.getElementById("username").value,
-        Email: document.getElementById("email").value,
-        Password: document.getElementById("password").value
-      };
+  clearValidationErrors(element) {
+    let newArr = [];
+    for (let error of this.props.prevState.errors) {
+      if (element !== error.element) {
+        newArr.push(error);
+      }
     }
-    console.log(userInput);
+    return { errors: newArr };
+  }
+
+  validateUser() {
+    const username = this.props.parentState.username;
+    const email = this.props.parentState.email;
+    const password = this.props.parentState.password;
+    const firstname = this.props.parentState.firstname;
+    const lastname = this.props.parentState.lastname;
+    const companyName = this.props.parentState.companyName;
+
+    let registrationValid = true;
+    if (username === "") {
+      this.props.onSubmit("username", "Username cannot be empty!");
+      registrationValid = false;
+    }
+    if (email === "") {
+      this.props.onSubmit("email", "Email cannot be empty!");
+      registrationValid = false;
+    }
+    if (password === "") {
+      this.props.onSubmit("password", "Password cannot be empty!");
+      registrationValid = false;
+    }
+    if (firstname === "") {
+      this.props.onSubmit("firstname", "Firstname cannot be empty!");
+      registrationValid = false;
+    }
+    if (lastname === "") {
+      this.props.onSubmit("lastname", "Lastname cannot be empty!");
+      registrationValid = false;
+    }
+    if (companyName === "") {
+      this.props.onSubmit("companyName", "companyName cannot be empty!");
+      registrationValid = false;
+    }
+    return registrationValid;
   }
 
   render() {
@@ -55,12 +83,13 @@ class NewUser extends Component {
         <Button
           variant="contained"
           color="primary"
+          type="submit"
           onClick={this.handleClickOpen}
         >
           Register
         </Button>
         <Dialog
-          open={this.state.open}
+          open={this.state.openDialog}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -70,8 +99,8 @@ class NewUser extends Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              <p>Thank you for joining us at S4A.</p>
-              <p>Providing the tools you need to succeed</p>
+              Thank you for joining us at S4A. Providing the tools you need to
+              succeed.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -86,3 +115,7 @@ class NewUser extends Component {
 }
 
 export default NewUser;
+
+/**
+ *
+ */
