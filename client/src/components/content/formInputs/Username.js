@@ -1,42 +1,49 @@
 import React, { Component } from "react";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
+import {
+  Input,
+  InputLabel,
+  FormControl,
+  FormHelperText
+} from "@material-ui/core";
 
 class Username extends Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
+    this.sortErrors = this.sortErrors.bind(this);
   }
-
-  /*showValidarionErrors(element, message) {
-    this.props.prevState = {
-      errors: [...this.props.prevState.errors, { element, message }]
-    };
-  }
-
-  clearValidationErrors(element) {
-    let newArr = [];
-    for (let error of this.props.prevState.errors) {
-      if (element != error.element) {
-        newArr.push(error);
-      }
-    }
-    return { errors: newArr };
-  }*/
 
   onChange(event) {
-    //this.props.username({ username: event.target.value });
     this.props.onUsernameChange(event.target.value);
+    this.props.onClearErrorMsg("username");
+  }
+
+  sortErrors(errors, key) {
+    let newArr = [];
+    for (let error of errors) {
+      if (key === error.element) {
+        newArr.push(error.message);
+      }
+    }
+    return newArr;
   }
 
   render() {
-    const username = this.props.username;
-    console.log(username);
+    const username = this.props.parentState.username;
+    const errors = this.props.parentState.errors;
+
     return (
       <FormControl margin="normal" required>
-        <InputLabel>username</InputLabel>
-        <Input id="username" value={username} onChange={this.onChange} />
+        <InputLabel htmlFor="username">username</InputLabel>
+        <Input
+          id="username"
+          name="username"
+          value={username}
+          onChange={this.onChange}
+        />
+        <FormHelperText id="usernameHelper" error={true}>
+          {this.sortErrors(errors, "username")[0]}
+        </FormHelperText>
       </FormControl>
     );
   }
