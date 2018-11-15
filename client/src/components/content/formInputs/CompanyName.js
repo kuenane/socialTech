@@ -15,7 +15,7 @@ class CompanyName extends Component {
 
   render() {
     const companyName = this.props.companyName;
-    console.log(companyName);
+
     return (
       <FormControl margin="normal" required>
         <InputLabel htmlFor="companyName">Company Name</InputLabel>
