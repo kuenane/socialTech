@@ -71,7 +71,7 @@ class NewUser extends Component {
       registrationValid = false;
     }
     if (companyName === "") {
-      this.props.onSubmit("companyName", "companyName cannot be empty!");
+      this.props.onSubmit("companyName", "CompanyName cannot be empty!");
       registrationValid = false;
     }
     return registrationValid;
