@@ -33,8 +33,8 @@ class RightPane extends Component {
       username: "",
       email: "",
       password: "",
-      errors: [],
-      validSubmission: true
+      errors: []
+      //   validSubmission: true
     };
     this.formValidation = this.formValidation.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -43,10 +43,18 @@ class RightPane extends Component {
     this.handleFirstnameChange = this.handleFirstnameChange.bind(this);
     this.handleLastnameChange = this.handleLastnameChange.bind(this);
     this.handleCompanyNameChange = this.handleCompanyNameChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClearError = this.handleClearError.bind(this);
   }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked });
+    this.handleClearError("firstname");
+    this.handleClearError("lastname");
+    this.handleClearError("username");
+    this.handleClearError("companyName");
+    this.handleClearError("email");
+    this.handleClearError("password");
   };
 
   handleUsernameChange(userInput) {
@@ -73,6 +81,24 @@ class RightPane extends Component {
     this.setState({ companyName: userInput });
   }
 
+  handleSubmit(element, message) {
+    this.setState(prevState => ({
+      errors: [...prevState.errors, { element, message }]
+    }));
+  }
+
+  handleClearError(element) {
+    this.setState(prevState => {
+      let newArr = [];
+      for (let error of prevState.errors) {
+        if (element !== error.element) {
+          newArr.push(error);
+        }
+      }
+      return { errors: newArr };
+    });
+  }
+
   toggleLabel() {
     return this.state.checkedA === false ? "User" : "Company";
   }
@@ -81,18 +107,21 @@ class RightPane extends Component {
     return this.state.checkedA === false ? (
       <Fragment>
         <Firstname
-          firstname={this.state.firstname}
+          parentState={this.state}
           onFirstnameChange={this.handleFirstnameChange}
+          onClearErrorMsg={this.handleClearError}
         />
         <Lastname
-          lastname={this.state.lastname}
+          parentState={this.state}
           onLastnameChange={this.handleLastnameChange}
+          onClearErrorMsg={this.handleClearError}
         />
       </Fragment>
     ) : (
       <CompanyName
-        companyName={this.state.companyName}
+        parentState={this.state}
         onCompanyNameChange={this.handleCompanyNameChange}
+        onClearErrorMsg={this.handleClearError}
       />
     );
   }
@@ -123,18 +152,21 @@ class RightPane extends Component {
           {this.userType()}
 
           <Username
-            username={this.state.username}
+            parentState={this.state}
             onUsernameChange={this.handleUsernameChange}
+            onClearErrorMsg={this.handleClearError}
           />
           <Email
-            email={this.state.email}
+            parentState={this.state}
             onEmailChange={this.handleEmailChange}
+            onClearErrorMsg={this.handleClearError}
           />
           <Password
-            password={this.state.password}
+            parentState={this.state}
             onPasswordChange={this.handlePasswordChange}
+            onClearErrorMsg={this.handleClearError}
           />
-          <NewUser props={this.state} />
+          <NewUser parentState={this.state} onSubmit={this.handleSubmit} />
         </FormGroup>
       </Paper>
     );
