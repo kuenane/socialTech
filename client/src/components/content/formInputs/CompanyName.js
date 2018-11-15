@@ -1,11 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 
-export default props => (
-  <FormControl margin="normal" required>
-    <InputLabel>Com[any Name</InputLabel>
-    <Input id="companyName" autoFocus />
-  </FormControl>
-);
+class CompanyName extends Component {
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    this.props.onCompanyNameChange(event.target.value);
+  }
+
+  render() {
+    const companyName = this.props.companyName;
+    console.log(companyName);
+    return (
+      <FormControl margin="normal" required>
+        <InputLabel htmlFor="companyName">Company Name</InputLabel>
+        <Input
+          id="companyName"
+          name="companyName"
+          value={companyName}
+          onChange={this.onChange}
+        />
+      </FormControl>
+    );
+  }
+}
+
+export default CompanyName;
