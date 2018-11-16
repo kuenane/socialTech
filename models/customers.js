@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const schema = mongoose.schema
+const Schema = mongoose.Schema
 const Sequelize = require('sequelize');
 
 
@@ -9,44 +9,50 @@ const CustomerSchema = Schema({
     FirtsName:
     {
         type: String,
-        require = true
+        required: true
 
     },
     LastName:
     {
         type: String,
-        require = true
+        required: true
     },
     Username:
     {
         type: String,
-        require = true
+        required: true
+      
 
     },
     Email:
     {
         type: String,
-        require = true
+        required: true
+
     },
     Password:
     {
         type: String,
-        require = true
+        required: true
+        
     },
     ReEnter:
     {
         type: String,
-        require = true
+        required: true
+
     },
     Contacts:
     {
-        type: int,
-        require = true
+        type: String,
+        required: true
+        
     },
     Address:
     {
         type: String,
-        require = true
+        required: true
+        
     },
     Date:
     {
@@ -55,4 +61,4 @@ const CustomerSchema = Schema({
     }
 });
 
-module.exports = customers = mongoose.model('customer', CustomerSchema);
+module.exports = customers = mongoose.model('customers', CustomerSchema);

@@ -8,11 +8,12 @@ const Product = require('../../models/products')
 // @route   GET api/products
 // @desc    GET all products
 // @access  public
-/*router.get('/', (req, res) => {
+router.get('/', (req, res) => {
     Product.find()
     .sort({ date: -1 })
     .then(products => res.json(products))
-}); // because we are already inside the required path */
+}); 
+// because we are already inside the required path */
 
 // POST
 // @route   POST api/products
