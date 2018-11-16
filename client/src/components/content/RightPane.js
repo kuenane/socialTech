@@ -45,6 +45,16 @@ class RightPane extends Component {
     this.handleCompanyNameChange = this.handleCompanyNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClearError = this.handleClearError.bind(this);
+    this.clearInput = this.clearInput.bind(this);
+  }
+
+  clearInput() {
+    this.setState({ firstname: "" });
+    this.setState({ lasstname: "" });
+    this.setState({ username: "" });
+    this.setState({ companyName: "" });
+    this.setState({ email: "" });
+    this.setState({ password: "" });
   }
 
   handleChange = name => event => {
@@ -55,6 +65,7 @@ class RightPane extends Component {
     this.handleClearError("companyName");
     this.handleClearError("email");
     this.handleClearError("password");
+    this.clearInput();
   };
 
   handleUsernameChange(userInput) {
@@ -85,6 +96,7 @@ class RightPane extends Component {
     this.setState(prevState => ({
       errors: [...prevState.errors, { element, message }]
     }));
+    this.clearInput();
   }
 
   handleClearError(element) {
