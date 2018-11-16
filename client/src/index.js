@@ -7,8 +7,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 const theme = createMuiTheme({});
 
-console.log({ theme });
-
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <CssBaseline />

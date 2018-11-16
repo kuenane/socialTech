@@ -31,6 +31,7 @@ class Email extends Component {
   render() {
     const email = this.props.parentState.email;
     const errors = this.props.parentState.errors;
+
     return (
       <FormControl margin="normal" required>
         <InputLabel htmlFor="email">Email Address</InputLabel>

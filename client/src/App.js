@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import { Header, Footer } from "./components/layouts";
-import Body from "./components/content/Body";
+import Body from "./components/layouts/Body";
 
 class App extends Component {
   render() {

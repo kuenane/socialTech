@@ -96,6 +96,7 @@ class RightPane extends Component {
     this.setState(prevState => ({
       errors: [...prevState.errors, { element, message }]
     }));
+
     this.clearInput();
   }
 

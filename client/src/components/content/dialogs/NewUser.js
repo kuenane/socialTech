@@ -7,6 +7,7 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
+import validator from "validator";
 
 class NewUser extends Component {
   constructor(props) {
@@ -57,7 +58,11 @@ class NewUser extends Component {
     if (email === "") {
       this.props.onSubmit("email", "Email cannot be empty!");
       registrationValid = false;
+    } else if (validator.isEmail(email) === false) {
+      this.props.onSubmit("email", "Invalid email format!");
+      registrationValid = false;
     }
+
     if (password === "") {
       this.props.onSubmit("password", "Password cannot be empty!");
       registrationValid = false;
