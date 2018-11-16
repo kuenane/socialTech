@@ -81,7 +81,39 @@ class NewUser extends Component {
     }
     return registrationValid;
   }
+  /* dependant on Api branch
+  sendPostRequet() {
+    var http = require("http");
 
+    var options = {
+      //this host will change when we deploy
+      host: "localhost",
+      port: "3000",
+      path: "/signup",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        //"Authorization": "Bearer token"
+      }
+    };
+
+    var req = http.request(options, function(res) {
+      var responseString = "";
+
+      res.on("data", function(data) {
+        responseString += data;
+        // save all the data from response
+      });
+      res.on("end", function() {
+        console.log(responseString);
+        // print to console when response ends
+      });
+    });
+    var reqBody = "sometext";
+    req.write(reqBody);
+    req.end();
+  }
+*/
   render() {
     return (
       <Fragment>
