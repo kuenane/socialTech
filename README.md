@@ -12,11 +12,11 @@
 
 must have npm installed and node 
 
-`$npm i 
+`$npm i`
 
 //which installs the node modules in the root
 
-$cd client && npm i `
+`$cd client && npm i `
 
 //which installs node modules in the client
 
