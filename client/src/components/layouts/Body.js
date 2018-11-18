@@ -49,7 +49,7 @@ class Body extends Component {
               <Tabs
                 value={value}
                 indicatorColor="secondary"
-                textColor="primary"
+                textColor="#b7bca6"
                 centered
                 onChange={this.handleChange}
               >
