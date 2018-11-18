@@ -16,7 +16,7 @@ class NewUser extends Component {
     this.state = {
       openDialog: false
     };
-
+    console.log(props);
     this.validateUser = this.validateUser.bind(this);
     this.clearValidationErrors = this.clearValidationErrors.bind(this);
     this.validateUser = this.validateUser.bind(this);
@@ -46,6 +46,7 @@ class NewUser extends Component {
     const username = this.props.parentState.username;
     const email = this.props.parentState.email;
     const password = this.props.parentState.password;
+    const confirmPassword = this.props.parentState.confirmPassword;
     const firstname = this.props.parentState.firstname;
     const lastname = this.props.parentState.lastname;
     const companyName = this.props.parentState.companyName;
@@ -67,6 +68,19 @@ class NewUser extends Component {
       this.props.onSubmit("password", "Password cannot be empty!");
       registrationValid = false;
     }
+
+    if (confirmPassword === "") {
+      this.props.onSubmit(
+        "confirmPassword",
+        "Confirm Password cannot be empty!"
+      );
+      registrationValid = false;
+    } else if (confirmPassword !== password) {
+      this.props.onSubmit("confirmPassword", "Passwords do not match");
+      this.props.onSubmit("password", "Passwords do not match");
+      registrationValid = false;
+    }
+
     if (firstname === "") {
       this.props.onSubmit("firstname", "Firstname cannot be empty!");
       registrationValid = false;

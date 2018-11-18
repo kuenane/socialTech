@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from "react";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Hamburger from "../content/icons/Hamburger";
+import Search from "../content/icons/Search";
 
-const styles = {
+const styles = theme => ({
   "@global": {
     "html, body, #root": {
       height: "100%"
@@ -17,7 +19,7 @@ const styles = {
     marginLeft: -12,
     marginRight: 20
   }
-};
+});
 
 class Header extends Component {
   constructor(props) {
@@ -32,10 +34,13 @@ class Header extends Component {
         <AppBar position="static" color="primary">
           <Toolbar>
             <IconButton
-              color="inherit"
+              color="secondary"
               aria-label="Menu"
               classes={{ root: classes.menuButton }}
-            />
+            >
+              <Hamburger />
+            </IconButton>
+
             <Typography
               variant="h6"
               color="inherit"
@@ -45,9 +50,7 @@ class Header extends Component {
             >
               S4A
             </Typography>
-            <Button variant="contained" color="primary">
-              Login
-            </Button>
+            <Search />
           </Toolbar>
         </AppBar>
       </Fragment>
