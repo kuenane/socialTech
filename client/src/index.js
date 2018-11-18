@@ -5,7 +5,18 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-const theme = createMuiTheme({});
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: "#b7bca6",
+      paper: "#f2f0f0"
+    },
+    primary: { main: "#bd0605" },
+    secondary: { main: "#e8b238" }
+  }
+});
+
+console.log(theme);
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
