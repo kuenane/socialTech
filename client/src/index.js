@@ -12,7 +12,7 @@ const theme = createMuiTheme({
       paper: "#f2f0f0"
     },
     primary: { main: "#bd0605" },
-    secondary: { main: "#5e8274" }
+    secondary: { main: "#e8b238" }
   }
 });
 
