@@ -2,8 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Paper, FormGroup } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import NewUser from "./dialogs/NewUser";
 import {
   Firstname,
