@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Grid, Paper, Tabs, Tab } from "@material-ui/core";
 import Register from "../content/Register";
+import Login from "../content/Login";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -33,6 +34,7 @@ class Body extends Component {
   displayChange() {
     const value = this.state.value;
     if (value === 0) {
+      return <Login />;
     } else {
       return <Register />;
     }
