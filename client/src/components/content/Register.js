@@ -35,7 +35,6 @@ class Register extends Component {
       password: "",
       confirmPassword: "",
       errors: []
-      //   validSubmission: true
     };
     this.formValidation = this.formValidation.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -148,8 +147,6 @@ class Register extends Component {
       />
     );
   }
-
-  formValidation() {}
 
   render() {
     const { classes } = this.classes;
