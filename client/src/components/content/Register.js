@@ -36,7 +36,7 @@ class Register extends Component {
       confirmPassword: "",
       errors: []
     };
-    this.formValidation = this.formValidation.bind(this);
+
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
