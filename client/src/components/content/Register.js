@@ -21,7 +21,7 @@ const styles = {
   registerLabel: {}
 };
 
-class RightPane extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.classes = props;
@@ -184,8 +184,8 @@ class RightPane extends Component {
   }
 }
 
-RightPane.propTypes = {
+Register.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(RightPane);
+export default withStyles(styles)(Register);
