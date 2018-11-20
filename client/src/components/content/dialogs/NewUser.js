@@ -16,7 +16,26 @@ class NewUser extends Component {
     this.state = {
       openDialog: false
     };
-    console.log(props);
+    var passwordValidator = require("password-validator");
+    this.passwordValidator = new passwordValidator();
+    this.passwordValidator
+      .is()
+      .min(8)
+      .is()
+      .max(100)
+      .has()
+      .uppercase()
+      .has()
+      .lowercase()
+      .has()
+      .digits()
+      .has()
+      .not()
+      .spaces()
+      .is()
+      .not()
+      .oneOf(["Passw0rd", "Password123"]);
+
     this.validateUser = this.validateUser.bind(this);
     this.clearValidationErrors = this.clearValidationErrors.bind(this);
     this.validateUser = this.validateUser.bind(this);
@@ -78,6 +97,13 @@ class NewUser extends Component {
     } else if (confirmPassword !== password) {
       this.props.onSubmit("confirmPassword", "Passwords do not match");
       this.props.onSubmit("password", "Passwords do not match");
+      registrationValid = false;
+    }
+    if (this.passwordValidator.validate(password) === false) {
+      this.props.onSubmit(
+        "password",
+        "Invalid password! Password must be longer than 8 characters. Contain 1 Uppercase,1 Lowercase, 1 Digit and 1 Special Character "
+      );
       registrationValid = false;
     }
 
