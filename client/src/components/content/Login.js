@@ -100,7 +100,7 @@ class Login extends Component {
             onPasswordChange={this.handlePasswordChange}
             onClearErrorMsg={this.handleClearError}
           />
-          <Login parentState={this.state} onSubmit={this.handleSubmit} />
+          <LoginButton parentState={this.state} onSubmit={this.handleSubmit} />
         </FormGroup>
       </Paper>
     );
