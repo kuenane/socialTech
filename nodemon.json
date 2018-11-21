@@ -1,0 +1,6 @@
+{
+    "env": {
+        "DB_PW" : "Doll_wtc4",
+        "JWT_KEY" : "s4asuperdollsecret"
+    }
+}

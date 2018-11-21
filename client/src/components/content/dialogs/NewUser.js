@@ -1,0 +1,194 @@
+import React, { Component, Fragment } from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "@material-ui/core";
+import validator from "validator";
+
+class NewUser extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      openDialog: false
+    };
+    var passwordValidator = require("password-validator");
+    this.passwordValidator = new passwordValidator();
+    this.passwordValidator
+      .is()
+      .min(8)
+      .is()
+      .max(100)
+      .has()
+      .uppercase()
+      .has()
+      .lowercase()
+      .has()
+      .digits()
+      .has()
+      .not()
+      .spaces()
+      .is()
+      .not()
+      .oneOf(["Passw0rd", "Password123"]);
+
+    this.validateUser = this.validateUser.bind(this);
+    this.clearValidationErrors = this.clearValidationErrors.bind(this);
+    this.validateUser = this.validateUser.bind(this);
+  }
+
+  handleClickOpen = () => {
+    if (this.validateUser() === true) {
+      this.setState({ openDialog: true });
+    }
+  };
+
+  handleClose = () => {
+    this.setState({ openDialog: false });
+  };
+
+  clearValidationErrors(element) {
+    let newArr = [];
+    for (let error of this.props.prevState.errors) {
+      if (element !== error.element) {
+        newArr.push(error);
+      }
+    }
+    return { errors: newArr };
+  }
+
+  validateUser() {
+    const username = this.props.parentState.username;
+    const email = this.props.parentState.email;
+    const password = this.props.parentState.password;
+    const confirmPassword = this.props.parentState.confirmPassword;
+    const firstname = this.props.parentState.firstname;
+    const lastname = this.props.parentState.lastname;
+    const companyName = this.props.parentState.companyName;
+
+    let registrationValid = true;
+    if (username === "") {
+      this.props.onSubmit("username", "Username cannot be empty!");
+      registrationValid = false;
+    }
+    if (email === "") {
+      this.props.onSubmit("email", "Email cannot be empty!");
+      registrationValid = false;
+    } else if (validator.isEmail(email) === false) {
+      this.props.onSubmit("email", "Invalid email format!");
+      registrationValid = false;
+    }
+
+    if (password === "") {
+      this.props.onSubmit("password", "Password cannot be empty!");
+      registrationValid = false;
+    }
+
+    if (confirmPassword === "") {
+      this.props.onSubmit(
+        "confirmPassword",
+        "Confirm Password cannot be empty!"
+      );
+      registrationValid = false;
+    } else if (confirmPassword !== password) {
+      this.props.onSubmit("confirmPassword", "Passwords do not match");
+      this.props.onSubmit("password", "Passwords do not match");
+      registrationValid = false;
+    }
+    if (this.passwordValidator.validate(password) === false) {
+      this.props.onSubmit(
+        "password",
+        "Invalid password! Password must be longer than 8 characters. Contain 1 Uppercase,1 Lowercase, 1 Digit and 1 Special Character "
+      );
+      registrationValid = false;
+    }
+
+    if (firstname === "") {
+      this.props.onSubmit("firstname", "Firstname cannot be empty!");
+      registrationValid = false;
+    }
+    if (lastname === "") {
+      this.props.onSubmit("lastname", "Lastname cannot be empty!");
+      registrationValid = false;
+    }
+    if (companyName === "") {
+      this.props.onSubmit("companyName", "CompanyName cannot be empty!");
+      registrationValid = false;
+    }
+    return registrationValid;
+  }
+  /* dependant on Api branch
+  sendPostRequet() {
+    var http = require("http");
+
+    var options = {
+      //this host will change when we deploy
+      host: "localhost",
+      port: "3000",
+      path: "/signup",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        //"Authorization": "Bearer token"
+      }
+    };
+
+    var req = http.request(options, function(res) {
+      var responseString = "";
+
+      res.on("data", function(data) {
+        responseString += data;
+        // save all the data from response
+      });
+      res.on("end", function() {
+        console.log(responseString);
+        // print to console when response ends
+      });
+    });
+    var reqBody = "sometext";
+    req.write(reqBody);
+    req.end();
+  }
+*/
+  render() {
+    return (
+      <Fragment>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={this.handleClickOpen}
+        >
+          Register
+        </Button>
+        <Dialog
+          open={this.state.openDialog}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Registration Succesfull"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Thank you for joining us at S4A. Providing the tools you need to
+              succeed.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Continue
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    );
+  }
+}
+
+export default NewUser;
