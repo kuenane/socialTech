@@ -3,7 +3,7 @@ import { Paper, FormGroup } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import LoginButton from "../content/formInputs/LoginButton";
-import { Username, Email, Password } from "./formInputs";
+import { Email, Password } from "./formInputs";
 
 const styles = {
   loginPaper: {
@@ -19,13 +19,11 @@ class Login extends Component {
     this.classes = props;
     this.state = {
       checkedA: false,
-      username: "",
       email: "",
       password: "",
       errors: []
     };
 
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,22 +32,16 @@ class Login extends Component {
   }
 
   clearInput() {
-    this.setState({ username: "" });
     this.setState({ email: "" });
     this.setState({ password: "" });
   }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked });
-    this.handleClearError("username");
     this.handleClearError("email");
     this.handleClearError("password");
     this.clearInput();
   };
-
-  handleUsernameChange(userInput) {
-    this.setState({ username: userInput });
-  }
 
   handleEmailChange(userInput) {
     this.setState({ email: userInput });
@@ -85,11 +77,6 @@ class Login extends Component {
     return (
       <Paper classes={{ root: classes.loginPaper }}>
         <FormGroup>
-          <Username
-            parentState={this.state}
-            onUsernameChange={this.handleUsernameChange}
-            onClearErrorMsg={this.handleClearError}
-          />
           <Email
             parentState={this.state}
             onEmailChange={this.handleEmailChange}
