@@ -1,12 +1,5 @@
-import React, { Component, Fragment } from "react";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from "@material-ui/core";
+import React, { Component } from "react";
+import { Button } from "@material-ui/core";
 import validator from "validator";
 
 class LoginButton extends Component {
@@ -81,4 +74,4 @@ class LoginButton extends Component {
   }
 }
 
-export default NewUser;
+export default LoginButton;
