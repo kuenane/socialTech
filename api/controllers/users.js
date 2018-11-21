@@ -23,6 +23,7 @@ module.exports.user_signUp_user = (req, res, next) => {
                     } else {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
+                            username: req.body.username,
                             email: req.body.email,
                             password: hash
                         })
@@ -46,7 +47,7 @@ module.exports.user_signUp_user = (req, res, next) => {
 }
 //user log in
 module.exports.user_login_user = (req, res, next) => {
-    User.find({email: req.body.email})
+    User.find({username: req.body.username})
         .exec()
         .then(user => {
             if (user.length < 1) {
@@ -62,15 +63,14 @@ module.exports.user_login_user = (req, res, next) => {
                 }
                 if (result) {
                     const token = jwt.sign({
-                        email: user[0].email,
+                        username: user[0].username,
                         userId: user[0]._id
                     },
-                    process.env.JWT_KEY,
-                    {
+                    process.env.JWT_KEY, {
                         expiresIn: "1h"
                     })
                     return res.status(200).json({
-                        message: 'Authorization successful',
+                        message: 'Authorization successful - You are logged in',
                         token: token
                     })
                 }
@@ -96,6 +96,7 @@ module.exports.user_get_all = (req, res, next) => {
                 count: doc.length,
                 products: doc.map(docs => {
                     return {
+                        username: docs.username,
                         email: docs.email,
                         _id: docs._id,
                         request: {
