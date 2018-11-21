@@ -35,15 +35,11 @@ class LoginButton extends Component {
   }
 
   validateUser() {
-    const username = this.props.parentState.username;
     const email = this.props.parentState.email;
     const password = this.props.parentState.password;
 
     let registrationValid = true;
-    if (username === "") {
-      this.props.onSubmit("username", "Username cannot be empty!");
-      registrationValid = false;
-    }
+
     if (email === "") {
       this.props.onSubmit("email", "Email cannot be empty!");
       registrationValid = false;
