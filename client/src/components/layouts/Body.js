@@ -7,13 +7,14 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   bodyStyle: {
-    height: "calc(100% - 59px - 48px)"
+    height: "calc(100% - 59px - 48px)",
+    overflow: "auto"
   },
   tab: {
     width: "50%"
   },
   bodyHeader: {
-    margin: "50px 5px 0px 5px"
+    margin: "20px 5px 0px 5px"
   }
 };
 
