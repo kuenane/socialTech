@@ -33,7 +33,7 @@ class ConfirmPassword extends Component {
     const errors = this.props.parentState.errors;
 
     return (
-      <FormControl margin="normal" required>
+      <FormControl margin="dense" required>
         <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
         <Input
           id="confirmPassword"
