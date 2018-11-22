@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import {
   Button,
   Dialog,
@@ -9,10 +11,16 @@ import {
 } from "@material-ui/core";
 import validator from "validator";
 
+const styles = {
+  registerButton: {
+    marginTop: "20px"
+  }
+};
+
 class NewUser extends Component {
   constructor(props) {
     super(props);
-
+    this.classes = props;
     this.state = {
       openDialog: false
     };
@@ -72,11 +80,11 @@ class NewUser extends Component {
 
     let registrationValid = true;
     if (username === "") {
-      this.props.onSubmit("username", "Username cannot be empty!");
+      this.props.onSubmit("username", "Field cannot be empty!");
       registrationValid = false;
     }
     if (email === "") {
-      this.props.onSubmit("email", "Email cannot be empty!");
+      this.props.onSubmit("email", "Field cannot be empty!");
       registrationValid = false;
     } else if (validator.isEmail(email) === false) {
       this.props.onSubmit("email", "Invalid email format!");
@@ -84,15 +92,12 @@ class NewUser extends Component {
     }
 
     if (password === "") {
-      this.props.onSubmit("password", "Password cannot be empty!");
+      this.props.onSubmit("password", "Field cannot be empty!");
       registrationValid = false;
     }
 
     if (confirmPassword === "") {
-      this.props.onSubmit(
-        "confirmPassword",
-        "Confirm Password cannot be empty!"
-      );
+      this.props.onSubmit("confirmPassword", "Field cannot be empty!");
       registrationValid = false;
     } else if (confirmPassword !== password) {
       this.props.onSubmit("confirmPassword", "Passwords do not match");
@@ -108,56 +113,26 @@ class NewUser extends Component {
     }
 
     if (firstname === "") {
-      this.props.onSubmit("firstname", "Firstname cannot be empty!");
+      this.props.onSubmit("firstname", "Field cannot be empty!");
       registrationValid = false;
     }
     if (lastname === "") {
-      this.props.onSubmit("lastname", "Lastname cannot be empty!");
+      this.props.onSubmit("lastname", "Field cannot be empty!");
       registrationValid = false;
     }
     if (companyName === "") {
-      this.props.onSubmit("companyName", "CompanyName cannot be empty!");
+      this.props.onSubmit("companyName", "Field cannot be empty!");
       registrationValid = false;
     }
     return registrationValid;
   }
-  /* dependant on Api branch
-  sendPostRequet() {
-    var http = require("http");
 
-    var options = {
-      //this host will change when we deploy
-      host: "localhost",
-      port: "3000",
-      path: "/signup",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-        //"Authorization": "Bearer token"
-      }
-    };
-
-    var req = http.request(options, function(res) {
-      var responseString = "";
-
-      res.on("data", function(data) {
-        responseString += data;
-        // save all the data from response
-      });
-      res.on("end", function() {
-        console.log(responseString);
-        // print to console when response ends
-      });
-    });
-    var reqBody = "sometext";
-    req.write(reqBody);
-    req.end();
-  }
-*/
   render() {
+    const { classes } = this.classes;
     return (
       <Fragment>
         <Button
+          className={classes.registerButton}
           variant="contained"
           color="primary"
           type="submit"
@@ -191,4 +166,7 @@ class NewUser extends Component {
   }
 }
 
-export default NewUser;
+NewUser.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+export default withStyles(styles)(NewUser);
