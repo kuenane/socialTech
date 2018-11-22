@@ -33,7 +33,7 @@ class Username extends Component {
     const errors = this.props.parentState.errors;
 
     return (
-      <FormControl margin="normal" required>
+      <FormControl margin="dense" required>
         <InputLabel htmlFor="username">username</InputLabel>
         <Input
           id="username"
