@@ -13,6 +13,14 @@ const theme = createMuiTheme({
     },
     primary: { main: "#bd0605" },
     secondary: { main: "#e8b238" }
+  },
+  overrides: {
+    MuiFormControl: {
+      marginDense: {
+        marginBottom: "0px",
+        marginTop: "0px"
+      }
+    }
   }
 });
 

@@ -1,11 +1,19 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import validator from "validator";
+
+const styles = {
+  loginButton: {
+    marginTop: "20px"
+  }
+};
 
 class LoginButton extends Component {
   constructor(props) {
     super(props);
-
+    this.classes = props;
     this.state = {
       openDialog: false
     };
@@ -41,11 +49,11 @@ class LoginButton extends Component {
 
     let registrationValid = true;
     if (username === "") {
-      this.props.onSubmit("username", "Username cannot be empty!");
+      this.props.onSubmit("username", "Field cannot be empty!");
       registrationValid = false;
     }
     if (email === "") {
-      this.props.onSubmit("email", "Email cannot be empty!");
+      this.props.onSubmit("email", "Field cannot be empty!");
       registrationValid = false;
     } else if (validator.isEmail(email) === false) {
       this.props.onSubmit("email", "Invalid email format!");
@@ -53,7 +61,7 @@ class LoginButton extends Component {
     }
 
     if (password === "") {
-      this.props.onSubmit("password", "Password cannot be empty!");
+      this.props.onSubmit("password", "Field cannot be empty!");
       registrationValid = false;
     }
 
@@ -61,8 +69,10 @@ class LoginButton extends Component {
   }
 
   render() {
+    const { classes } = this.classes;
     return (
       <Button
+        className={classes.loginButton}
         variant="contained"
         color="primary"
         type="submit"
@@ -74,4 +84,8 @@ class LoginButton extends Component {
   }
 }
 
-export default LoginButton;
+LoginButton.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(LoginButton);

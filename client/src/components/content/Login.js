@@ -7,7 +7,7 @@ import { Username, Email, Password } from "./formInputs";
 
 const styles = {
   loginPaper: {
-    padding: "5% 15% 5% 15%",
+    padding: "5% 15%",
     margin: "10px 5px"
   },
   loginLabel: {}

@@ -33,7 +33,7 @@ class Email extends Component {
     const errors = this.props.parentState.errors;
 
     return (
-      <FormControl margin="normal" required>
+      <FormControl margin="dense" required>
         <InputLabel htmlFor="email">Email Address</InputLabel>
         <Input
           id="email"

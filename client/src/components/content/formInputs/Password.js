@@ -33,7 +33,7 @@ class Password extends Component {
     const errors = this.props.parentState.errors;
 
     return (
-      <FormControl margin="normal" required>
+      <FormControl margin="dense" required>
         <InputLabel htmlFor="password">Password</InputLabel>
         <Input
           id="password"

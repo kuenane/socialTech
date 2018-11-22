@@ -15,10 +15,9 @@ import ConfirmPassword from "../content/formInputs/ConfirmPassword";
 
 const styles = {
   registerPaper: {
-    padding: "5% 15% 5% 15%",
+    padding: "5% 15%",
     margin: "10px 5px"
-  },
-  registerLabel: {}
+  }
 };
 
 class Register extends Component {
