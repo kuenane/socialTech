@@ -22,8 +22,12 @@ class NewUser extends Component {
     super(props);
     this.classes = props;
     this.state = {
-      openDialog: false
+      openDialog: false,
+      response: "",
+      post: "",
+      responseToPost: ""
     };
+
     var passwordValidator = require("password-validator");
     this.passwordValidator = new passwordValidator();
     this.passwordValidator
@@ -49,8 +53,31 @@ class NewUser extends Component {
     this.validateUser = this.validateUser.bind(this);
   }
 
-  handleClickOpen = () => {
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ response: res.express }))
+      .catch(err => console.log(err));
+  }
+  callApi = async () => {
+    const response = await fetch("/signup");
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
+
+  handleClickOpen = async e => {
+    e.preventDefault();
     if (this.validateUser() === true) {
+      const response = await fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ post: this.state.post })
+      });
+      const body = await response.text();
+      console.log(body);
+      console.log(this.state.response);
       this.setState({ openDialog: true });
     }
   };
@@ -74,9 +101,6 @@ class NewUser extends Component {
     const email = this.props.parentState.email;
     const password = this.props.parentState.password;
     const confirmPassword = this.props.parentState.confirmPassword;
-    const firstname = this.props.parentState.firstname;
-    const lastname = this.props.parentState.lastname;
-    const companyName = this.props.parentState.companyName;
 
     let registrationValid = true;
     if (username === "") {
@@ -99,7 +123,8 @@ class NewUser extends Component {
     if (confirmPassword === "") {
       this.props.onSubmit("confirmPassword", "Field cannot be empty!");
       registrationValid = false;
-    } else if (confirmPassword !== password) {
+    }
+    if (confirmPassword !== password) {
       this.props.onSubmit("confirmPassword", "Passwords do not match");
       this.props.onSubmit("password", "Passwords do not match");
       registrationValid = false;
@@ -112,23 +137,12 @@ class NewUser extends Component {
       registrationValid = false;
     }
 
-    if (firstname === "") {
-      this.props.onSubmit("firstname", "Field cannot be empty!");
-      registrationValid = false;
-    }
-    if (lastname === "") {
-      this.props.onSubmit("lastname", "Field cannot be empty!");
-      registrationValid = false;
-    }
-    if (companyName === "") {
-      this.props.onSubmit("companyName", "Field cannot be empty!");
-      registrationValid = false;
-    }
     return registrationValid;
   }
 
   render() {
     const { classes } = this.classes;
+
     return (
       <Fragment>
         <Button
