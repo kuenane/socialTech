@@ -53,31 +53,26 @@ class NewUser extends Component {
     this.validateUser = this.validateUser.bind(this);
   }
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
-  }
-  callApi = async () => {
-    const response = await fetch("/signup");
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
-
-  handleClickOpen = async e => {
-    e.preventDefault();
+  handleClickOpen = event => {
+    event.preventDefault();
     if (this.validateUser() === true) {
-      const response = await fetch("/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ post: this.state.post })
-      });
-      const body = await response.text();
-      console.log(body);
-      console.log(this.state.response);
+      const username = this.props.parentState.username;
+      const email = this.props.parentState.email;
+      const password = this.props.parentState.password;
+      const axios = require("axios");
+      axios
+        .post("/users/signup", {
+          username: username,
+          email: email,
+          password: password
+        })
+        .then(function(response) {
+          console.log(response);
+          console.log(response.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       this.setState({ openDialog: true });
     }
   };
