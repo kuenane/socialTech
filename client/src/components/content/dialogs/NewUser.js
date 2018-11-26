@@ -10,6 +10,7 @@ import {
   DialogTitle
 } from "@material-ui/core";
 import validator from "validator";
+import axios from "axios";
 
 const styles = {
   registerButton: {
@@ -51,6 +52,28 @@ class NewUser extends Component {
     this.validateUser = this.validateUser.bind(this);
     this.clearValidationErrors = this.clearValidationErrors.bind(this);
     this.validateUser = this.validateUser.bind(this);
+    this.checkDuplicateUser = this.checkDuplicateUser.bind(this);
+  }
+
+  checkDuplicateUser(email) {
+    var users = [];
+    axios
+      .get("/users")
+      .then(function(response) {
+        users = response.data.users;
+        console.log(users);
+        console.log(response);
+        for (const item in users) {
+          if (email === item) {
+            console.log("awe");
+            return true;
+          }
+        }
+        return false;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   handleClickOpen = event => {
@@ -59,21 +82,30 @@ class NewUser extends Component {
       const username = this.props.parentState.username;
       const email = this.props.parentState.email;
       const password = this.props.parentState.password;
-      const axios = require("axios");
-      axios
-        .post("/users/signup", {
-          username: username,
-          email: email,
-          password: password
-        })
-        .then(function(response) {
-          console.log(response);
-          console.log(response.data);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      this.setState({ openDialog: true });
+
+      // Make a request for a user with a given ID
+
+      if (this.checkDuplicateUser(email) === true) {
+        this.props.onSubmit(
+          "email",
+          "This email already exists in our database"
+        );
+      } else {
+        /* axios
+          .post("/users/signup", {
+            username: username,
+            email: email,
+            password: password
+          })
+          .then(function(response) {
+            console.log(response);
+            console.log(response.data);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+        this.setState({ openDialog: true });*/
+      }
     }
   };
 
