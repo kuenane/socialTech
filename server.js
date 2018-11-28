@@ -6,4 +6,6 @@ const port = process.env.PORT || 5000
 //create server
 const server = http.createServer(app)
 //start server
-server.listen(port)
+server.listen(port, function() {
+    console.log('running server at ' + port)
+})

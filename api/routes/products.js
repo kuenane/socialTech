@@ -10,7 +10,6 @@ router.get('/',  ProdController.prod_get_all)
 router.post('/', checkAuth, ProdController.prod_create_prod)
 //using ID
 router.get('/:prodId', ProdController.prod_get_byId)
-
 //patching [ updating ]
 router.patch('/:prodId', checkAuth,  ProdController.prod_update_prod)
 //deleting

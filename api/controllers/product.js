@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 //get all products
 module.exports.prod_get_all = (req, res, next) => {
     Prod.find()
-        .select('name price color _id')
+        .select('name price quantity color _id')
         .exec()
         .then(doc => {
             const response = {
@@ -13,6 +13,7 @@ module.exports.prod_get_all = (req, res, next) => {
                     return {
                         name: docs.name,
                         price: docs.price,
+                        quantity: docs.quantity,
                         color: docs.color,
                         _id: docs._id,
                         request: {
@@ -65,6 +66,7 @@ module.exports.prod_create_prod = (req, res, next) => {
         _id : new mongoose.Types.ObjectId,
         name : req.body.name,
         price : req.body.price,
+        quantity: req.body.quantity,
         color : req.body.color
     })
     //save product to database
@@ -76,6 +78,7 @@ module.exports.prod_create_prod = (req, res, next) => {
                 createdProduct: {
                     name: result.name,
                     price: result.price,
+                    quantity: result.quantity,
                     color: result.color,
                     _id: result._id,
                     request: {
@@ -132,6 +135,7 @@ module.exports.prod_del_prod = (req, res, next) => {
                     body: {
                         name: 'String',
                         price: 'Number',
+                        quantity: 'Number',
                         color: 'String'
                     }
                 }
